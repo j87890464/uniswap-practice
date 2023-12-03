@@ -1,5 +1,6 @@
 # Flash Swap Practice
 This is a UniswapV2 flash swap practice, our goal is to pass the test.
+source: https://github.com/AppWorks-School/Blockchain-Resource
 
 ### Practice 1: `Liquidator.sol`
 `liquidate()` will call `FakeLendingProtocol.liquidatePosition()` to liquidate the position of the user.
@@ -17,8 +18,6 @@ If you are interested in the flash swap arbitrage, you can read more in this [re
 Clone this repository, install Node.js dependencies, and build the source code:
 
 ```bash
-git clone git@github.com:AppWorks-School/Blockchain-Resource.git
-cd Blockchain-Resource/section3/FlashSwapPractice
 npm install
 forge install
 forge build
