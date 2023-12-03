@@ -1,66 +1,27 @@
-## Foundry
+# Flash Swap Practice
+This is a UniswapV2 flash swap practice, our goal is to pass the test.
 
-**Foundry is a blazing fast, portable and modular toolkit for Ethereum application development written in Rust.**
+### Practice 1: `Liquidator.sol`
+`liquidate()` will call `FakeLendingProtocol.liquidatePosition()` to liquidate the position of the user.
+Follow the instructions in `contracts/Liquidator.sol` to complete the practice.
+(Do not change any other files)
 
-Foundry consists of:
+### Practice 2: `Arbitrage.sol`
+`arbitrage()` will do the arbitrage between the given two pools (must be the same pair).
+Follow the instructions in `contracts/Arbitrage.sol` to complete the practice.
+For convenience, we will only practice method 1, and fix the borrowed amount to 5 WETH
 
--   **Forge**: Ethereum testing framework (like Truffle, Hardhat and DappTools).
--   **Cast**: Swiss army knife for interacting with EVM smart contracts, sending transactions and getting chain data.
--   **Anvil**: Local Ethereum node, akin to Ganache, Hardhat Network.
--   **Chisel**: Fast, utilitarian, and verbose solidity REPL.
+If you are interested in the flash swap arbitrage, you can read more in this [repository](https://github.com/paco0x/amm-arbitrageur)
 
-## Documentation
+## Local Development
+Clone this repository, install Node.js dependencies, and build the source code:
 
-https://book.getfoundry.sh/
-
-## Usage
-
-### Build
-
-```shell
-$ forge build
+```bash
+git clone git@github.com:AppWorks-School/Blockchain-Resource.git
+cd Blockchain-Resource/section3/FlashSwapPractice
+npm install
+forge install
+forge build
+forge test
 ```
 
-### Test
-
-```shell
-$ forge test
-```
-
-### Format
-
-```shell
-$ forge fmt
-```
-
-### Gas Snapshots
-
-```shell
-$ forge snapshot
-```
-
-### Anvil
-
-```shell
-$ anvil
-```
-
-### Deploy
-
-```shell
-$ forge script script/Counter.s.sol:CounterScript --rpc-url <your_rpc_url> --private-key <your_private_key>
-```
-
-### Cast
-
-```shell
-$ cast <subcommand>
-```
-
-### Help
-
-```shell
-$ forge --help
-$ anvil --help
-$ cast --help
-```

@@ -8,6 +8,7 @@ import { IUniswapV2Callee } from "v2-core/interfaces/IUniswapV2Callee.sol";
 
 // This is a practice contract for flash swap arbitrage
 contract Arbitrage is IUniswapV2Callee, Ownable {
+
     struct CallbackData {
         address priceLowerPool;
         address priceHigherPool;
@@ -21,6 +22,7 @@ contract Arbitrage is IUniswapV2Callee, Ownable {
     //
     // EXTERNAL NON-VIEW ONLY OWNER
     //
+
     function withdraw() external onlyOwner {
         (bool success, ) = msg.sender.call{ value: address(this).balance }("");
         require(success, "Withdraw failed");
@@ -33,6 +35,7 @@ contract Arbitrage is IUniswapV2Callee, Ownable {
     //
     // EXTERNAL NON-VIEW
     //
+
     function uniswapV2Call(address sender, uint256 amount0, uint256 amount1, bytes calldata data) external override {
         // Method 1
         // validate
@@ -52,13 +55,13 @@ contract Arbitrage is IUniswapV2Callee, Ownable {
     }
 
     // Method 1 is
-    // - borrow WETH from lower price pool
-    // - swap WETH for USDC in higher price pool
-    // - repay USDC to lower pool
+    //  - borrow WETH from lower price pool
+    //  - swap WETH for USDC in higher price pool
+    //  - repay USDC to lower pool
     // Method 2 is
-    // - borrow USDC from higher price pool
-    // - swap USDC for WETH in lower pool
-    // - repay WETH to higher pool
+    //  - borrow USDC from higher price pool
+    //  - swap USDC for WETH in lower pool
+    //  - repay WETH to higher pool
     // for testing convenient, we implement the method 1 here
     function arbitrage(address priceLowerPool, address priceHigherPool, uint256 borrowETH) external {
         // Method 1
@@ -72,15 +75,15 @@ contract Arbitrage is IUniswapV2Callee, Ownable {
         CallbackData memory callbackData = CallbackData(priceLowerPool, priceHigherPool, _beforeBalance, _borrowToken, _paybackToken, borrowETH, _amountIn);
         IUniswapV2Pair(priceLowerPool).swap(borrowETH, 0, address(this), abi.encode(callbackData));
     }
-
     //
     // INTERNAL PURE
     //
+
     // copy from UniswapV2Library
     function _getAmountIn(
-    uint256 amountOut,
-    uint256 reserveIn,
-    uint256 reserveOut
+        uint256 amountOut,
+        uint256 reserveIn,
+        uint256 reserveOut
     ) internal pure returns (uint256 amountIn) {
         require(amountOut > 0, "UniswapV2Library: INSUFFICIENT_OUTPUT_AMOUNT");
         require(reserveIn > 0 && reserveOut > 0, "UniswapV2Library: INSUFFICIENT_LIQUIDITY");
@@ -91,9 +94,9 @@ contract Arbitrage is IUniswapV2Callee, Ownable {
 
     // copy from UniswapV2Library
     function _getAmountOut(
-    uint256 amountIn,
-    uint256 reserveIn,
-    uint256 reserveOut
+        uint256 amountIn,
+        uint256 reserveIn,
+        uint256 reserveOut
     ) internal pure returns (uint256 amountOut) {
         require(amountIn > 0, "UniswapV2Library: INSUFFICIENT_INPUT_AMOUNT");
         require(reserveIn > 0 && reserveOut > 0, "UniswapV2Library: INSUFFICIENT_LIQUIDITY");
